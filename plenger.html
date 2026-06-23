@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEKS SELANJUTNYA 🤓</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0b0f1a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.box {
+    width: 330px;
+    background: #1a2233;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255,0,80,0.3);
+    animation: float 2s infinite ease-in-out;
+}
+
+img {
+    width: 100%;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.caption {
+    margin: 10px 0;
+    font-size: 15px;
+    min-height: 40px;
+    font-weight: bold;
+}
+
+button {
+    background: #ff0055;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.shake {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0% { transform: translate(0); }
+    25% { transform: translate(5px, -5px); }
+    50% { transform: translate(-5px, 5px); }
+    75% { transform: translate(5px, 5px); }
+    100% { transform: translate(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔊 SOUND CLICK -->
+<audio id="clickSound" src="https://ik.imagekit.io/mlcbcs6u5/ssstik.io_1782159480567.mp3" preload="auto"></audio>
+
+<!-- 🔊 SOUND KETAWA -->
+<audio id="laughSound" src="https://www.soundjay.com/human/laugh-1.mp3" preload="auto"></audio>
+
+<div class="box" id="box">
+    <img id="foto" src="">
+    <div class="caption" id="caption">BUM</div>
+
+    <button onclick="plenger()">🤓 PLENGER 🤓</button>
+</div>
+
+<script>
+const memes = [
+{img:"https://ik.imagekit.io/mlcbcs6u5/snaptik_7634013786936020242_5_v2.jpeg", caption:"KELIATAN kurang VAKSIN 😭"},
+{img:"https://ik.imagekit.io/mlcbcs6u5/snaptik_7634013786936020242_6_v2.jpeg", caption:"etmin full skin plenger final 😈"},
+{img:"https://ik.imagekit.io/mlcbcs6u5/snaptik_7634013786936020242_2_v2.jpeg", caption:"keliatan kaya buronan kelas kakap jir 😈🤯"},
+{img:"https://ik.imagekit.io/mlcbcs6u5/snaptik_7634013786936020242_4_v2.jpeg", caption:"TUTORIAL ON MODE diaktifkan 🤓"},
+{img:"https://ik.imagekit.io/mlcbcs6u5/snaptik_7634013786936020242_0_v2.jpeg", caption:"AURA PLENGER +9999 JIR 🥶"},
+{img:"https://ik.imagekit.io/mlcbcs6u5/snaptik_7634013786936020242_1_v2.jpeg", caption:"POSITIF MANDI SEHARI SEKALI 💀"},
+{img:"https://ik.imagekit.io/mlcbcs6u5/snaptik_7634013786936020242_3_v2.jpeg", caption:"PLENGER DETECTED 🚨"}
+];
+
+let index = 0;
+
+let firstClick = false;
+
+function plenger() {
+    const box = document.getElementById("box");
+    const meme = memes[index];
+
+    // 🔊 load fix pertama klik
+    if (!firstClick) {
+        document.getElementById("clickSound").load();
+        document.getElementById("laughSound").load();
+        firstClick = true;
+    }
+
+    // 🔊 CLICK SOUND (SAFE)
+    const click = document.getElementById("clickSound");
+    click.currentTime = 0;
+    click.play().catch(()=>{});
+
+    // 🔊 LAUGH SOUND (SAFE)
+    const laugh = document.getElementById("laughSound");
+    laugh.currentTime = 0;
+    laugh.play().catch(()=>{});
+
+    // gambar + caption
+    document.getElementById("foto").src = meme.img;
+    document.getElementById("caption").innerText = meme.caption;
+
+    // shake
+    box.classList.remove("shake");
+    void box.offsetWidth;
+    box.classList.add("shake");
+
+    // random effect
+    let img = document.getElementById("foto");
+    img.style.transform = `scale(${1 + Math.random() * 0.1}) rotate(${Math.random()*3 - 1.5}deg)`;
+
+    index++;
+    if (index >= memes.length) index = 0;
+}
+</script>
+
+</body>
+</html>
